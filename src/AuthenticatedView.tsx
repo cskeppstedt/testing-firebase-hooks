@@ -1,16 +1,10 @@
 import React from "react";
-import { getFirestore, collection, DocumentData } from "firebase/firestore";
-import { useCollection } from "react-firebase-hooks/firestore";
+import { getFirestore, collection } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import firebaseApp from "./firebaseApp";
 
-interface IReceiptRow extends DocumentData {
-  description: string;
-  amount: number;
-  purchase_date: Date;
-}
-
 export default function AuthenticatedView() {
-  const [values, loading, error] = useCollection(
+  const [values, loading, error] = useCollectionData(
     collection(getFirestore(firebaseApp), "receipt_rows"),
     {}
   );
@@ -20,6 +14,6 @@ export default function AuthenticatedView() {
   ) : error ? (
     <pre>Error: {error.message}</pre>
   ) : (
-    <pre>{JSON.stringify(values?.docs, null, 2)}</pre>
+    <pre>{JSON.stringify(values, null, 2)}</pre>
   );
 }
