@@ -15,7 +15,7 @@ root.render(
   </React.StrictMode>
 );
 
-console.log("firebaseApp", firebaseApp);
+console.log("firebaseApp", { firebaseApp });
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
