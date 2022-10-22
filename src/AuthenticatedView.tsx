@@ -6,19 +6,19 @@ import ReceiptRowsTable from "./ReceiptRowsTable";
 export default function AuthenticatedView() {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
-  const [purchased, setPurchased] = useState("");
+  const [purchaseDate, setPurchaseDate] = useState("");
 
   const onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     const formattedDescription = description.trim();
     const formattedAmount = parseFloat(amount);
-    const formattedPurchased = new Date(purchased);
+    const formattedPurchaseDate = new Date(purchaseDate);
 
     await addDoc(collection(getFirestore(firebaseApp), "receipt_rows"), {
       description: formattedDescription,
       amount: formattedAmount,
-      purchased: formattedPurchased,
+      purchaseDate: formattedPurchaseDate,
     });
 
     setDescription("");
@@ -50,13 +50,13 @@ export default function AuthenticatedView() {
           </div>
 
           <div>
-            <label htmlFor="purchased">Purchase date</label>
+            <label htmlFor="purchaseDate">Purchase date</label>
             <input
-              name="purchased"
+              name="purchaseDate"
               required
               type="date"
-              value={purchased}
-              onChange={(evt) => setPurchased(evt.target.value)}
+              value={purchaseDate}
+              onChange={(evt) => setPurchaseDate(evt.target.value)}
             />
           </div>
 
